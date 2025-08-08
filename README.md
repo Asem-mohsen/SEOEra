@@ -1,61 +1,282 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Posts Task
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A complete Laravel application for managing posts with user authentication, admin panel, and RESTful APIs.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- ✅ **Laravel Telescope** - Logging all actions and errors
+- ✅ **JWT Authentication** - Secure API authentication
+- ✅ **User Registration** - Register with name, email, phone, and password
+- ✅ **Mobile Login** - Login with phone number and password
+- ✅ **Posts API** - CRUD operations for posts
+- ✅ **Admin Panel** - Dashboard for managing users and posts
+- ✅ **Post Creation** - Create posts with title, description (2KB limit), and contact phone
+- ✅ **Paginated Posts List** - View posts with truncated descriptions (512 chars)
+- ✅ **Database Migrations & Seeders** - Proper database setup
+- ✅ **SOLID Principles** - Clean architecture with services and repositories
+- ✅ **Unit Testing** - API test coverage
+- ✅ **Custom Artisan Command** - `php artisan install:project`
+- ✅ **Daily Reports** - Automated daily reports via email
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd laravel-posts-task
+   ```
 
-## Learning Laravel
+2. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. **Set up environment**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+4. **Configure database in `.env`**
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=laravel_posts
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+5. **Install the project**
+   ```bash
+   php artisan install:project "Laravel Posts Task"
+   ```
 
-## Laravel Sponsors
+## API Documentation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Authentication Endpoints
 
-### Premium Partners
+#### Register User
+```http
+POST /api/v1/register
+Content-Type: application/json
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "+1234567890",
+    "password": "password123",
+    "password_confirmation": "password123"
+}
+```
 
-## Contributing
+#### Login with Mobile
+```http
+POST /api/v1/login
+Content-Type: application/json
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+{
+    "phone": "+1234567890",
+    "password": "password123"
+}
+```
 
-## Code of Conduct
+#### Get Current User
+```http
+GET /api/v1/me
+Authorization: Bearer {token}
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### Logout
+```http
+POST /api/v1/logout
+Authorization: Bearer {token}
+```
 
-## Security Vulnerabilities
+### Posts Endpoints
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Get All Posts (Public)
+```http
+GET /api/v1/posts?per_page=15
+```
+
+#### Get Single Post (Public)
+```http
+GET /api/v1/posts/{id}
+```
+
+#### Create Post (Authenticated)
+```http
+POST /api/v1/posts
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+    "title": "My Post Title",
+    "description": "This is my post description (max 2KB)",
+    "contact_phone": "+1234567890"
+}
+```
+
+#### Get User's Posts (Authenticated)
+```http
+GET /api/v1/my-posts?per_page=15
+Authorization: Bearer {token}
+```
+
+### Admin Endpoints
+
+#### Dashboard Statistics
+```http
+GET /api/v1/admin/stats
+```
+
+#### Get All Users
+```http
+GET /api/v1/admin/users?per_page=15
+```
+
+#### Get Single User
+```http
+GET /api/v1/admin/users/{id}
+```
+
+#### Update User
+```http
+PUT /api/v1/admin/users/{id}
+Content-Type: application/json
+
+{
+    "name": "Updated Name",
+    "email": "updated@example.com",
+    "phone": "+1234567890"
+}
+```
+
+#### Delete User
+```http
+DELETE /api/v1/admin/users/{id}
+```
+
+#### Get All Posts
+```http
+GET /api/v1/admin/posts?per_page=15
+```
+
+#### Get Single Post
+```http
+GET /api/v1/admin/posts/{id}
+```
+
+#### Update Post
+```http
+PUT /api/v1/admin/posts/{id}
+Content-Type: application/json
+
+{
+    "title": "Updated Title",
+    "description": "Updated description",
+    "contact_phone": "+1234567890"
+}
+```
+
+#### Delete Post
+```http
+DELETE /api/v1/admin/posts/{id}
+```
+
+## Admin Panel
+
+Access the admin panel at: `http://localhost:8000/admin`
+
+The admin panel provides:
+- Dashboard with statistics
+- User management (CRUD)
+- Post management (CRUD)
+- Real-time data updates
+
+## Testing
+
+Run the test suite:
+```bash
+php artisan test
+```
+
+## Daily Reports
+
+The system includes a daily report command that runs at midnight:
+```bash
+php artisan report:daily
+```
+
+This command:
+- Counts new users and posts for the day
+- Sends email report to admin
+- Can be scheduled with cron
+
+## Database Structure
+
+### Users Table
+- `id` - Primary key
+- `name` - User's name
+- `email` - Unique email address
+- `phone` - Unique phone number
+- `password` - Hashed password
+- `created_at` - Creation timestamp
+- `updated_at` - Update timestamp
+
+### Posts Table
+- `id` - Primary key
+- `user_id` - Foreign key to users
+- `title` - Post title (max 255 chars)
+- `description` - Post description (max 2KB)
+- `contact_phone` - Contact phone number
+- `created_at` - Creation timestamp
+- `updated_at` - Update timestamp
+
+## Architecture
+
+The application follows SOLID principles and clean architecture:
+
+- **Controllers** - Handle HTTP requests and responses
+- **Services** - Business logic layer
+- **Repositories** - Data access layer
+- **Models** - Eloquent models with relationships
+- **Resources** - API response formatting
+- **Requests** - Form validation
+- **Commands** - Artisan commands for automation
+
+## Telescope
+
+Laravel Telescope is configured to log:
+- All HTTP requests
+- Database queries
+- Cache operations
+- Job executions
+- Mail sending
+- Notifications
+- Scheduled tasks
+
+Access Telescope at: `http://localhost:8000/telescope`
+
+## Security Features
+
+- JWT token authentication
+- Password hashing
+- Input validation
+- SQL injection protection
+- XSS protection
+- CSRF protection
+
+## Performance Optimizations
+
+- Database indexing
+- Eager loading for relationships
+- Pagination for large datasets
+- Query optimization
+- Caching strategies
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
