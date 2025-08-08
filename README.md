@@ -134,17 +134,17 @@ GET /api/v1/admin/stats
 
 #### Get All Users
 ```http
-GET /api/v1/admin/users?per_page=15
+GET /api/v1/users?per_page=15
 ```
 
 #### Get Single User
 ```http
-GET /api/v1/admin/users/{id}
+GET /api/v1/users/{id}
 ```
 
 #### Update User
 ```http
-PUT /api/v1/admin/users/{id}
+PUT /api/v1/users/{id}
 Content-Type: application/json
 
 {
@@ -156,22 +156,22 @@ Content-Type: application/json
 
 #### Delete User
 ```http
-DELETE /api/v1/admin/users/{id}
+DELETE /api/v1/users/{id}
 ```
 
 #### Get All Posts
 ```http
-GET /api/v1/admin/posts?per_page=15
+GET /api/v1/posts?per_page=15
 ```
 
 #### Get Single Post
 ```http
-GET /api/v1/admin/posts/{id}
+GET /api/v1/posts/{id}
 ```
 
 #### Update Post
 ```http
-PUT /api/v1/admin/posts/{id}
+PUT /api/v1/posts/{id}
 Content-Type: application/json
 
 {
@@ -183,7 +183,7 @@ Content-Type: application/json
 
 #### Delete Post
 ```http
-DELETE /api/v1/admin/posts/{id}
+DELETE /api/v1/posts/{id}
 ```
 
 ## Admin Panel

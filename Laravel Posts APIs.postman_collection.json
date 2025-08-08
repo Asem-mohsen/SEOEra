@@ -1,0 +1,675 @@
+{
+	"info": {
+		"_postman_id": "cd4bed06-84f5-4e4c-8039-13ed361fbca5",
+		"name": "Laravel Posts APIs",
+		"description": "Base URL = \"[http://127.0.0.1:8080\"](http://127.0.0.1:8000\")",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29085453",
+		"_collection_link": "https://geeks9.postman.co/workspace/My-Workspace~13470df3-a150-4d5c-8622-9007b775679b/collection/29085453-cd4bed06-84f5-4e4c-8039-13ed361fbca5?action=share&source=collection_link&creator=29085453"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();",
+									"if(response.data.token){",
+									"    pm.collectionVariables.set('token','Bearer '+response.data.token);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone",
+									"value": "+2011392934",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"description": "required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();",
+									"if(response.data.token){",
+									"    pm.collectionVariables.set('token','Bearer '+response.data.token);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Aswwsem Mohsen",
+									"description": "required/string",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "+2011392934",
+									"description": "required/string",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "assem@gmail.com",
+									"description": "required/string",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"description": "required/min 8 ",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456789",
+									"description": "required/same as password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Contains endpoints related to user authentication and account access.\n\nIncludes login for existing users and registration for new users.\n\n- **Login** – Authenticates a user and returns an access token for API requests.\n    \n- **Register** – Creates a new account and returns an access token upon successful registration."
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9aBearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9a",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Asoum",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "assemm3232323dden@yahoo.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "012932324",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"description": "nullable",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password_confirmation",
+									"value": "",
+									"description": "nullable",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9aBearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9a",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Assem Mohsen",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "assemmohsdden@yahoo.com",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "012932324",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "012932324",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "012932324",
+									"description": "required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9aBearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9a",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Asoum",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "assemm3232323dden@yahoo.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "012932324",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"description": "nullable",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password_confirmation",
+									"value": "",
+									"description": "nullable",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/users/:user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":user"
+							],
+							"variable": [
+								{
+									"key": "user",
+									"value": "17"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9aBearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9a",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/users/:user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":user"
+							],
+							"variable": [
+								{
+									"key": "user",
+									"value": "18"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Contains all API endpoints related to managing users in the system.\n\nIncludes operations to create new users, update user details, retrieve a list of users, and delete users from the database.\n\n- **Store** – Creates a new user with the provided data.\n    \n- **Update** – Updates an existing user’s information.\n    \n- **Index** – Retrieves a paginated or filtered list of all users.\n    \n- **Delete** – Removes a user from the system."
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9aBearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9a",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/posts",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9aBearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9a",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "testin post",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": " consectetur adipiscing elit. Sed pulvinar, lorem quis malesuada cursus, felis ligula cursus est, non interdum eros justo nec nulla. Nulla vitae ante euismod, faucibus magna nec, dictum justo. \n",
+									"description": "required / cannot exceed 2KB",
+									"type": "text"
+								},
+								{
+									"key": "contact_phone",
+									"value": "012932324",
+									"description": "required",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/posts",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9aBearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9a",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Asoum",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "consectetur adipiscing elit. Sed pulvinar, lorem quis malesuada cursus, felis ligula cursus est, non interdum eros justo nec nulla. Nulla vitae ante euismod, faucibus magna nec, dictum justo. \n",
+									"type": "text"
+								},
+								{
+									"key": "contact_phone",
+									"value": "01323242424",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/posts/:post",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								":post"
+							],
+							"variable": [
+								{
+									"key": "post",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9aBearer 3|Fhpjh3EbxvhAZZmyN52IEqrg9bEaevTHWgXnCX16a1a81a9a",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/admin/users/:user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"users",
+								":user"
+							],
+							"variable": [
+								{
+									"key": "user",
+									"value": "16"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Contains all API endpoints for managing posts created by users.\n\nIncludes operations to create posts, update them, list all posts, and delete them.\n\n- **Store** – Creates a new post with the provided title, description, and other attributes.\n    \n- **Update** – Updates the content or details of an existing post.\n    \n- **Index** – Retrieves a paginated or filtered list of all posts.\n    \n- **Delete** – Deletes a post from the system."
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/admin/stats",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "Bearer 5|ijgb0UMC93pVvfYFEr0cct74cdSgKmctozjQ5vwW1c2567af",
+			"type": "string"
+		}
+	]
+}
